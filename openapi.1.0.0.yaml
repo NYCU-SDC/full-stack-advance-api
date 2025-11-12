@@ -1,0 +1,172 @@
+openapi: 3.0.0
+info:
+  title: SDC Tasks API
+  version: 1.0.0
+tags:
+  - name: Tasks
+paths:
+  /api/task:
+    get:
+      operationId: Tasks_getAllTasks
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskResponse'
+      tags:
+        - Tasks
+    post:
+      operationId: Tasks_createTask
+      parameters: []
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+      tags:
+        - Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+  /api/task/{id}:
+    get:
+      operationId: Tasks_getTaskById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '404':
+          description: The server cannot find the requested resource.
+      tags:
+        - Tasks
+    put:
+      operationId: Tasks_updateTask
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '404':
+          description: The server cannot find the requested resource.
+      tags:
+        - Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskRequest'
+    delete:
+      operationId: Tasks_deleteTask
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '204':
+          description: 'There is no content to send for this request, but the headers may be useful. '
+        '404':
+          description: The server cannot find the requested resource.
+      tags:
+        - Tasks
+components:
+  schemas:
+    CreateTaskRequest:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+    TaskResponse:
+      type: object
+      required:
+        - id
+        - labels
+        - title
+        - description
+        - status
+        - dueDate
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: integer
+          format: int32
+        labels:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        dueDate:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    UpdateTaskRequest:
+      type: object
+      required:
+        - title
+        - description
+        - status
+        - dueDate
+        - labels
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        dueDate:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+    Versions:
+      type: string
+      enum:
+        - 1.0.0
+servers:
+  - url: https://example.com
+    description: Single server endpoint
+    variables: {}
