@@ -21,8 +21,10 @@ model TaskResponse {
   description: string;
   status: string;
   dueDate: string;
+
   // assignee: string;
   createdAt: string;
+
   updatedAt: string;
 }
 
@@ -39,17 +41,17 @@ model UpdateTaskRequest {
 }
 
 @tag("Tasks")
-namespace SDCTasksAPI.Tasks{
+namespace SDCTasksAPI.Tasks {
   @route("/task")
   @get
-  op getAllTasks() :  {
+  op getAllTasks(): {
     @statusCode statusCode: 200;
     @body body: TaskResponse[];
   };
 
   @route("/task/{id}")
   @get
-  op getTaskById(@path id: int32) :  {
+  op getTaskById(@path id: int32): {
     @statusCode statusCode: 200;
     @body body: TaskResponse;
   } | {
@@ -58,14 +60,14 @@ namespace SDCTasksAPI.Tasks{
 
   @route("/task")
   @post
-  op createTask(@body request: CreateTaskRequest) :  {
+  op createTask(@body request: CreateTaskRequest): {
     @statusCode statusCode: 201;
     @body body: TaskResponse;
   };
 
   @route("/task/{id}")
   @put
-  op updateTask(@path id: int32, @body request: UpdateTaskRequest) :  {
+  op updateTask(@path id: int32, @body request: UpdateTaskRequest): {
     @statusCode statusCode: 200;
     @body body: TaskResponse;
   } | {
@@ -74,12 +76,9 @@ namespace SDCTasksAPI.Tasks{
 
   @route("/task/{id}")
   @delete
-  op deleteTask(@path id: int32) :  {
+  op deleteTask(@path id: int32): {
     @statusCode statusCode: 204;
   } | {
     @statusCode statusCode: 404;
   };
-} 
-
-
-
+}
