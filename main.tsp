@@ -82,3 +82,14 @@ namespace SDCTasksAPI.Tasks {
     @statusCode statusCode: 404;
   };
 }
+
+@tag("Auth")
+namespace SDCTasksAPI.Auth {
+  @route("/api/login/auth/google")
+  @get
+  op login(@query c: string, @query r: string): {
+    @statusCode statusCode: 302;
+  } | {
+    @statusCode statusCode: 404;
+  };
+}
