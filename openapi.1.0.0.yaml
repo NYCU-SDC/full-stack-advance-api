@@ -6,7 +6,7 @@ tags:
   - name: Tasks
   - name: Auth
 paths:
-  /api/login/auth/google:
+  /api/login/google:
     get:
       operationId: Auth_login
       description: If successful, the callback URL will include additional query parameters, `access_token` and `refresh_token`.
