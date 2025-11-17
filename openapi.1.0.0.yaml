@@ -4,7 +4,43 @@ info:
   version: 1.0.0
 tags:
   - name: Tasks
+  - name: Auth
 paths:
+  /api/login/auth/google:
+    get:
+      operationId: Auth_login
+      description: If successful, the callback URL will include additional query parameters, `access_token` and `refresh_token`.
+      parameters:
+        - name: c
+          in: query
+          required: true
+          description: The callback url that backend redirect back to frontend
+          schema:
+            type: string
+          explode: false
+        - name: r
+          in: query
+          required: false
+          description: The url that frontend redirect from callback to the page user was viewing
+          schema:
+            type: string
+          explode: false
+      responses:
+        '302':
+          description: Redirection
+        '404':
+          description: The server cannot find the requested resource.
+      tags:
+        - Auth
+  /api/logout:
+    get:
+      operationId: Auth_logout
+      parameters: []
+      responses:
+        '204':
+          description: 'There is no content to send for this request, but the headers may be useful. '
+      tags:
+        - Auth
   /api/task:
     get:
       operationId: Tasks_getAllTasks
