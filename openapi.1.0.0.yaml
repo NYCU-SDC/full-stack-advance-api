@@ -41,6 +41,24 @@ paths:
           description: 'There is no content to send for this request, but the headers may be useful. '
       tags:
         - Auth
+  /api/refreshToken/{refreshToken}:
+    get:
+      operationId: Auth_refreshToken
+      parameters:
+        - name: refreshToken
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshTokenResponse'
+      tags:
+        - Auth
   /api/task:
     get:
       operationId: Tasks_getAllTasks
@@ -145,6 +163,20 @@ components:
         - title
       properties:
         title:
+          type: string
+    RefreshTokenResponse:
+      type: object
+      required:
+        - access_token
+        - expiration
+        - refresh_token
+      properties:
+        access_token:
+          type: string
+        expiration:
+          type: integer
+          format: int32
+        refresh_token:
           type: string
     TaskResponse:
       type: object
