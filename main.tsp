@@ -40,6 +40,12 @@ model UpdateTaskRequest {
   labels: string[];
 }
 
+model RefreshTokenResponse {
+  access_token: string;
+  expiration: int32;
+  refresh_token: string;
+}
+
 @tag("Tasks")
 namespace SDCTasksAPI.Tasks {
   @route("/task")
@@ -108,5 +114,15 @@ namespace SDCTasksAPI.Auth {
   op logout(): {
     @statusCode
     statusCode: 204;
+  };
+
+  @route("/refreshToken/{refreshToken}")
+  @get
+  op refreshToken(@path refreshToken: string): {
+    @statusCode
+    statusCode: 200;
+
+    @body
+    body: RefreshTokenResponse;
   };
 }
