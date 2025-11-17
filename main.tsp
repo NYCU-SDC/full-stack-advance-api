@@ -85,11 +85,28 @@ namespace SDCTasksAPI.Tasks {
 
 @tag("Auth")
 namespace SDCTasksAPI.Auth {
-  @route("/api/login/auth/google")
+  @doc("If successful, the callback URL will include additional query parameters, `access_token` and `refresh_token`.")
+  @route("/login/auth/google")
   @get
-  op login(@query c: string, @query r: string): {
-    @statusCode statusCode: 302;
+  op login(
+    @doc("The callback url that backend redirect back to frontend")
+    @query
+    c: string,
+
+    @doc("The url that frontend redirect from callback to the page user was viewing")
+    @query
+    r?: string,
+  ): {
+    @statusCode
+    statusCode: 302;
   } | {
     @statusCode statusCode: 404;
+  };
+
+  @route("/logout")
+  @get
+  op logout(): {
+    @statusCode
+    statusCode: 204;
   };
 }
