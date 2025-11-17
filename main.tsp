@@ -86,7 +86,7 @@ namespace SDCTasksAPI.Tasks {
 @tag("Auth")
 namespace SDCTasksAPI.Auth {
   @doc("If successful, the callback URL will include additional query parameters, `access_token` and `refresh_token`.")
-  @route("/login/auth/google")
+  @route("/login/google")
   @get
   op login(
     @doc("The callback url that backend redirect back to frontend")
