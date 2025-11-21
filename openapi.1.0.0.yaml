@@ -5,6 +5,7 @@ info:
 tags:
   - name: Tasks
   - name: Auth
+  - name: Users
 paths:
   /api/login/google:
     get:
@@ -155,6 +156,38 @@ paths:
           description: The server cannot find the requested resource.
       tags:
         - Tasks
+  /api/user/me:
+    get:
+      operationId: Users_getMe
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SDCTasksAPI.Users.UserResponse'
+      tags:
+        - Users
+  /api/users:
+    put:
+      operationId: Users_update
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SDCTasksAPI.Users.UserResponse'
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SDCTasksAPI.Users.UserUpdateRequest'
 components:
   schemas:
     CreateTaskRequest:
@@ -177,6 +210,32 @@ components:
           type: integer
           format: int32
         refresh_token:
+          type: string
+    SDCTasksAPI.Users.UserResponse:
+      type: object
+      required:
+        - id
+        - username
+        - email
+        - about
+        - avatarUrl
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        about:
+          type: string
+        avatarUrl:
+          type: string
+    SDCTasksAPI.Users.UserUpdateRequest:
+      type: object
+      required:
+        - about
+      properties:
+        about:
           type: string
     TaskResponse:
       type: object
