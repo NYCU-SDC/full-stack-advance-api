@@ -126,3 +126,38 @@ namespace SDCTasksAPI.Auth {
     body: RefreshTokenResponse;
   };
 }
+
+@tag("Users")
+namespace SDCTasksAPI.Users {
+  model UserResponse {
+    id: string;
+    username: string;
+    email: string;
+    about: string;
+    avatarUrl: string;
+  }
+
+  model UserUpdateRequest {
+    about: string;
+  }
+
+  @route("/user/me")
+  @get
+  op getMe(): {
+    @statusCode
+    statusCode: 200;
+
+    @body
+    body: UserResponse;
+  };
+
+  @route("/users")
+  @put
+  op update(@body body: UserUpdateRequest): {
+    @statusCode
+    statusCode: 200;
+
+    @body
+    body: UserResponse;
+  };
+}
