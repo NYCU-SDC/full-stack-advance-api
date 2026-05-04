@@ -241,10 +241,8 @@ components:
       type: object
       required:
         - id
-        - labels
         - title
         - description
-        - status
         - dueDate
         - createdAt
         - updatedAt
@@ -252,15 +250,9 @@ components:
         id:
           type: integer
           format: int32
-        labels:
-          type: array
-          items:
-            type: string
         title:
           type: string
         description:
-          type: string
-        status:
           type: string
         dueDate:
           type: string
@@ -273,22 +265,14 @@ components:
       required:
         - title
         - description
-        - status
         - dueDate
-        - labels
       properties:
         title:
           type: string
         description:
           type: string
-        status:
-          type: string
         dueDate:
           type: string
-        labels:
-          type: array
-          items:
-            type: string
     Versions:
       type: string
       enum:
