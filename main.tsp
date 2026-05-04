@@ -16,10 +16,8 @@ enum Versions {
 
 model TaskResponse {
   id: int32;
-  labels: string[];
   title: string;
   description: string;
-  status: string;
   dueDate: string;
 
   // assignee: string;
@@ -35,9 +33,7 @@ model CreateTaskRequest {
 model UpdateTaskRequest {
   title: string;
   description: string;
-  status: string;
   dueDate: string;
-  labels: string[];
 }
 
 model RefreshTokenResponse {
