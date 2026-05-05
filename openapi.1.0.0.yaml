@@ -194,8 +194,14 @@ components:
       type: object
       required:
         - title
+        - description
+        - dueDate
       properties:
         title:
+          type: string
+        description:
+          type: string
+        dueDate:
           type: string
     RefreshTokenResponse:
       type: object
