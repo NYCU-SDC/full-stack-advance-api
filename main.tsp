@@ -28,6 +28,8 @@ model TaskResponse {
 
 model CreateTaskRequest {
   title: string;
+  description: string;
+  dueDate: string;
 }
 
 model UpdateTaskRequest {
